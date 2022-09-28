@@ -11,7 +11,7 @@ class Bootloader extends Phaser.Scene{
     
     preload() {
         this.load.path = './assets/';
-        this.load.image(['1', '2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','danzatrina']);
+        this.load.image(['1', '2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','danzatrina','reiniciar','rompecabezas']);
         this.load.image("drop2", "drop2.png");
         this.load.image("fondo", "fondo.png");
         this.load.audio('Llorona', ['./Llorona.mp3']);
@@ -19,9 +19,13 @@ class Bootloader extends Phaser.Scene{
     }
 
     create() {
-        this.fondo = this.add.image(1000, 500, 'fondo').setDepth(-2).setAlpha(.55);
+        this.fondo = this.add.image(1000, 470, 'fondo').setDepth(-2).setAlpha(.55);
         //Imagen de referencia para puzzle
         this.imgReferencia = this.add.image(1190, 190, 'danzatrina').setScale(.37);
+        //Imagen reiniciar
+        this.reiniciar = this.add.image(470,850,'reiniciar').setScale(.3).setInteractive();
+        //Imagen Rompecabezas
+        this.titulo = this.add.image(470,80,'rompecabezas').setScale(.6);
         //MÚSICA DE FONDO
         //this.music = this.sound.add('Llorona', {loop: true, volume: .2});
         //this.music.play();
@@ -130,7 +134,11 @@ class Bootloader extends Phaser.Scene{
                 dropzone.input.dropZone = false;
                 this.acierto.play();
             }
-            
+        });
+
+        //EVENTOS PARA REINICIO
+        this.input.on(eventos.GAMEOBJECT_POINTER_OVER,() =>{
+
         });
         
 
