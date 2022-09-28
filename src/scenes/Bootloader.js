@@ -17,39 +17,74 @@ class Bootloader extends Phaser.Scene{
     }
 
     create() {
-        this.fondo = this.add.image(1000, 500, 'madera')
-        .setDepth(-2)
-        .setAlpha(.6);
-        this.imgReferencia = this.add.image(1300, 190, 'danzatrina').setScale(.4);
-        this.pieza1 = this.add.image(1050, 500, '1').setInteractive().setScale(.7).setName("1");
+        this.fondo = this.add.image(1000, 500, 'madera').setDepth(-2).setAlpha(.55);
+        //Imagen de referencia para puzzle
+        this.imgReferencia = this.add.image(1190, 190, 'danzatrina').setScale(.37);
+        //Piezas de rompecabezas
+        this.pieza1 = this.add.image(1530, 280, '1').setInteractive().setScale(.7).setName("1");
         this.input.setDraggable(this.pieza1);
-        
+        this.pieza2 = this.add.image(1050, 840, '2').setInteractive().setScale(.7).setName("2");
+        this.input.setDraggable(this.pieza2);
+        this.pieza3 = this.add.image(1905, 200, '3').setInteractive().setScale(.7).setName("3");
+        this.input.setDraggable(this.pieza3);
+        this.pieza4 = this.add.image(1050, 670, '4').setInteractive().setScale(.7).setName("4");
+        this.input.setDraggable(this.pieza4);
+        this.pieza5 = this.add.image(1650, 840,'5').setInteractive().setScale(.7).setName("5");
+        this.input.setDraggable(this.pieza5);
+        this.pieza6 = this.add.image(1450, 500, '6').setInteractive().setScale(.7).setName("6");
+        this.input.setDraggable(this.pieza6);
+        this.pieza7 = this.add.image(1650, 670, '7').setInteractive().setScale(.7).setName("7");
+        this.input.setDraggable(this.pieza7);
+        this.pieza8 = this.add.image(1530, 105, '8').setInteractive().setScale(.7).setName("8");
+        this.input.setDraggable(this.pieza8);
+        this.pieza9 = this.add.image(1720, 280, '9').setInteractive().setScale(.7).setName("9");
+        this.input.setDraggable(this.pieza9);
+        this.pieza10 = this.add.image(1250, 840, '10').setInteractive().setScale(.7).setName("10");
+        this.input.setDraggable(this.pieza10);
+        this.pieza11 = this.add.image(1050, 500, '11').setInteractive().setScale(.7).setName("11");
+        this.input.setDraggable(this.pieza11);
+        this.pieza12 = this.add.image(1720, 105, '12').setInteractive().setScale(.7).setName("12");
+        this.input.setDraggable(this.pieza12);
+        this.pieza13 = this.add.image(1650, 500, '13').setInteractive().setScale(.7).setName("13");
+        this.input.setDraggable(this.pieza13);
+        this.pieza14 = this.add.image(1250, 500, '14').setInteractive().setScale(.7).setName("14");
+        this.input.setDraggable(this.pieza14);
+        this.pieza15 = this.add.image(1850, 840, '15').setInteractive().setScale(.7).setName("15");
+        this.input.setDraggable(this.pieza15);
+        this.pieza16 = this.add.image(1850, 670, '16').setInteractive().setScale(.7).setName("16");
+        this.input.setDraggable(this.pieza16);
+        this.pieza17 = this.add.image(1850, 500, '17').setInteractive().setScale(.7).setName("17");
+        this.input.setDraggable(this.pieza17);
+        this.pieza18 = this.add.image(1250, 670, '18').setInteractive().setScale(.7).setName("18");
+        this.input.setDraggable(this.pieza18);
+        this.pieza19 = this.add.image(1450, 670, '19').setInteractive().setScale(.7).setName("19");
+        this.input.setDraggable(this.pieza19);
+        this.pieza20 = this.add.image(1450, 840, '20').setInteractive().setScale(.7).setName("20");
+        this.input.setDraggable(this.pieza20);
         //Fila 1
-        this.drop = this.add.image(126, 100, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
-        this.drop2 = this.add.image(300, 100, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
-        this.drop3 = this.add.image(474, 100, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
-        this.drop4 = this.add.image(648, 100, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
-        this.drop5 = this.add.image(822, 100, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
+        this.drop = this.add.image(126, 200, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("1").input.dropZone = true;
+        this.drop2 = this.add.image(300, 200, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("2").input.dropZone = true;
+        this.drop3 = this.add.image(474, 200, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("3").input.dropZone = true;
+        this.drop4 = this.add.image(648, 200, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("4").input.dropZone = true;
+        this.drop5 = this.add.image(822, 200, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("5").input.dropZone = true;
         //Fila 2
-        this.drop6 = this.add.image(126, 250, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
-        this.drop7= this.add.image(300, 250, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
-        this.drop8 = this.add.image(474, 250, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
-        this.drop9 = this.add.image(648, 250, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
-        this.drop10 = this.add.image(822, 250, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;  
+        this.drop6 = this.add.image(126, 350, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("6").input.dropZone = true;
+        this.drop7= this.add.image(300, 350, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("7").input.dropZone = true;
+        this.drop8 = this.add.image(474, 350, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("8").input.dropZone = true;
+        this.drop9 = this.add.image(648, 350, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("9").input.dropZone = true;
+        this.drop10 = this.add.image(822, 350, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("10").input.dropZone = true;  
         //Fila 3
-        this.drop11 = this.add.image(126, 400, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
-        this.drop12= this.add.image(300, 400, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
-        this.drop13 = this.add.image(474, 400, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
-        this.drop14 = this.add.image(648, 400, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
-        this.drop15 = this.add.image(822, 400, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;        
+        this.drop11 = this.add.image(126, 500, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("11").input.dropZone = true;
+        this.drop12= this.add.image(300, 500, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("12").input.dropZone = true;
+        this.drop13 = this.add.image(474, 500, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("13").input.dropZone = true;
+        this.drop14 = this.add.image(648, 500, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("14").input.dropZone = true;
+        this.drop15 = this.add.image(822, 500, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("15").input.dropZone = true;        
         //Fila 3
-        this.drop16 = this.add.image(126, 550, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
-        this.drop17= this.add.image(300, 550, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
-        this.drop18 = this.add.image(474, 550, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
-        this.drop19 = this.add.image(648, 550, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;
-        this.drop20 = this.add.image(822, 550, 'drop2').setDepth(-1).setInteractive().setScale(.7).input.dropZone = true;   
-        //Arreglo que guarda los nombres de los drops
-        let dropNombres = ['1', '2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20'];      
+        this.drop16 = this.add.image(126, 650, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("16").input.dropZone = true;
+        this.drop17= this.add.image(300, 650, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("17").input.dropZone = true;
+        this.drop18 = this.add.image(474, 650, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("18").input.dropZone = true;
+        this.drop19 = this.add.image(648, 650, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("19").input.dropZone = true;
+        this.drop20 = this.add.image(822, 650, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("20").input.dropZone = true;        
 
         //Programación de eventos principales
         const eventos = Phaser.Input.Events;
@@ -68,18 +103,11 @@ class Bootloader extends Phaser.Scene{
                 obj.x = obj.input.dragStartX;//Arrastre de un game-object sobre una zona "dropeable"
                 obj.y = obj.input.dragStartY;
             }
-            else{
-                console.log("Objeto: ",obj);
-                //console.log("Drop:", dropNombres[parseInt(obj.name)-1])
-                // if(obj.name ){
-                //     obj.input.draggable = false;
-                // }
-                obj.setScale(.7);
-            }   
+            obj.setScale(.7);
         });
         //Personalización de eventos de la zona "dropeable"
-        this.input.on(eventos.DRAG_ENTER, (pointer, obj, dropzone) => {
-            dropzone.setTint(0xff0000);
+        this.input.on(eventos.DRAG_ENTER, (pointer, obj, dropzone) => {           
+            dropzone.setTint(0x3339FF);
         });
         this.input.on(eventos.DRAG_LEAVE, (pointer, obj, dropzone) => {
             dropzone.clearTint();
@@ -88,6 +116,12 @@ class Bootloader extends Phaser.Scene{
         this.input.on(eventos.DROP, (pointer, obj, dropzone) => {
             obj.x = dropzone.x;
             obj.y = dropzone.y;
+            console.log("Objeto: ",obj.name);
+            console.log("Dropzone: ",dropzone.name);
+            if(dropzone.name == obj.name){
+                obj.input.draggable = false;
+                dropzone.input.dropZone = false;
+            }
         });
         
 
