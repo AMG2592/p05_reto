@@ -137,10 +137,12 @@ class Bootloader extends Phaser.Scene{
         });
 
         //EVENTOS PARA REINICIO
-        this.input.on(eventos.GAMEOBJECT_POINTER_OVER,() =>{
-
+        this.reiniciar.on(eventos.POINTER_OVER, function() {
+            this.setScale(.4);
         });
-        
+        this.reiniciar.on(eventos.POINTER_OUT, function() {
+            this.setScale(.3);
+        });
 
     }
 
