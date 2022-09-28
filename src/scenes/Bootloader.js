@@ -14,12 +14,17 @@ class Bootloader extends Phaser.Scene{
         this.load.image(['1', '2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','danzatrina']);
         this.load.image("drop2", "drop2.png");
         this.load.image("madera", "madera.png");
+        this.load.audio('Llorona', ['./Llorona.mp3']);
+        this.load.audio('acierto', ['./pop.mp3']);
     }
 
     create() {
-        this.fondo = this.add.image(1000, 500, 'madera').setDepth(-2).setAlpha(.55);
+        //this.fondo = this.add.image(1000, 500, 'madera').setDepth(-2).setAlpha(.55);
         //Imagen de referencia para puzzle
         this.imgReferencia = this.add.image(1190, 190, 'danzatrina').setScale(.37);
+        //MÚSICA DE FONDO
+        //this.music = this.sound.add('Llorona', {loop: true, volume: .2});
+        //this.music.play();
         //Piezas de rompecabezas
         this.pieza1 = this.add.image(1530, 280, '1').setInteractive().setScale(.7).setName("1");
         this.input.setDraggable(this.pieza1);

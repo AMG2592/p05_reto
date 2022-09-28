@@ -11,7 +11,7 @@ const config = {
     parent: "contenedor",		    //Nombre del id del elemento <div> en el index.html
                                     // se refiere a dónde se pondrá el canvas o lienzo
     pixelArt: true,		            //Diseño con pixeles definidos (no borrosos)
-    backgroundColor: "#34495e", 	//Color de fondo del canvas ()
+    backgroundColor: "#420E6F", 	//Color de fondo del canvas ()
     scene: [Bootloader],    //Aquí irá la lista de scenas del juego
     banner:{
         hidePhaser: true,
