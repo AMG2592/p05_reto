@@ -1,5 +1,5 @@
-class Bootloader extends Phaser.Scene{
-    constructor(){
+class Bootloader extends Phaser.Scene {
+    constructor() {
         super({
             key: 'Bootloader'
         });
@@ -8,34 +8,42 @@ class Bootloader extends Phaser.Scene{
     init() {
         console.log('Escena Bootloader')
     }
-    
+
     preload() {
         this.load.path = './assets/';
-        this.load.image(['1', '2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','danzatrina','reiniciar','rompecabezas','cursor','ganaste']);
+        this.load.image(['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', 'danzatrina', 'reiniciar', 'rompecabezas', 'cursor', 'ganaste']);
         this.load.image("drop2", "drop2.png");
         this.load.image("fondo", "fondo.png");
         this.load.audio('Llorona', ['./Llorona.mp3']);
         this.load.audio('acierto', ['./pop.mp3']);
+        this.load.audio('ganaste', ['./ganaste.mp3']);
     }
 
     create() {
+        //Banderas
+        let ocupado = false;
         //Contador 
         let contador = 0;
         let aciertos = 20;
         this.fondo = this.add.image(1000, 470, 'fondo').setDepth(-2).setAlpha(.55);
+        //TIMER
+        let timedEvent;
+        let timedEvent2;
         //Imagen de referencia para puzzle
         this.imgReferencia = this.add.image(1190, 190, 'danzatrina').setScale(.37);
         //Imagen reiniciar
-        this.reiniciar = this.add.image(470,840,'reiniciar').setScale(.3).setInteractive();
+        this.reiniciar = this.add.image(470, 840, 'reiniciar').setScale(.3).setInteractive();
         //Imagen Rompecabezas
-        this.titulo = this.add.image(470,80,'rompecabezas').setScale(.6);
+        this.titulo = this.add.image(470, 80, 'rompecabezas').setScale(.6);
         //Imagen GANASTE
-        this.titulo2 = this.add.image(1000, 470,'ganaste').setDepth(2).setAlpha(0);
+        this.ganaste = this.add.image(1000, 470, 'ganaste').setDepth(2).setAlpha(0);
         //MÚSICA DE FONDO
-        //this.music = this.sound.add('Llorona', {loop: true, volume: .2});
-        //this.music.play();
+        this.music = this.sound.add('Llorona', { loop: true, volume: .2 });
+        this.music.play();
         //MÚSICA ACIERTO
-        this.acierto = this.sound.add('acierto', {loop:false,volume: 0.5});
+        this.acierto = this.sound.add('acierto', { loop: false, volume: 0.5 });
+        //MÚSICA GANASTE
+        this.ganasteAudio = this.sound.add('ganaste', { loop: false, volume: 0.5 });
         //Piezas de rompecabezas
         this.pieza1 = this.add.image(1530, 280, '1').setInteractive().setScale(.7).setName("1");
         this.input.setDraggable(this.pieza1);
@@ -45,7 +53,7 @@ class Bootloader extends Phaser.Scene{
         this.input.setDraggable(this.pieza3);
         this.pieza4 = this.add.image(1050, 670, '4').setInteractive().setScale(.7).setName("4");
         this.input.setDraggable(this.pieza4);
-        this.pieza5 = this.add.image(1650, 840,'5').setInteractive().setScale(.7).setName("5");
+        this.pieza5 = this.add.image(1650, 840, '5').setInteractive().setScale(.7).setName("5");
         this.input.setDraggable(this.pieza5);
         this.pieza6 = this.add.image(1450, 500, '6').setInteractive().setScale(.7).setName("6");
         this.input.setDraggable(this.pieza6);
@@ -85,23 +93,22 @@ class Bootloader extends Phaser.Scene{
         this.drop5 = this.add.image(822, 200, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("5").input.dropZone = true;
         //Fila 2
         this.drop6 = this.add.image(126, 350, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("6").input.dropZone = true;
-        this.drop7= this.add.image(300, 350, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("7").input.dropZone = true;
+        this.drop7 = this.add.image(300, 350, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("7").input.dropZone = true;
         this.drop8 = this.add.image(474, 350, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("8").input.dropZone = true;
         this.drop9 = this.add.image(648, 350, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("9").input.dropZone = true;
-        this.drop10 = this.add.image(822, 350, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("10").input.dropZone = true;  
+        this.drop10 = this.add.image(822, 350, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("10").input.dropZone = true;
         //Fila 3
         this.drop11 = this.add.image(126, 500, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("11").input.dropZone = true;
-        this.drop12= this.add.image(300, 500, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("12").input.dropZone = true;
+        this.drop12 = this.add.image(300, 500, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("12").input.dropZone = true;
         this.drop13 = this.add.image(474, 500, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("13").input.dropZone = true;
         this.drop14 = this.add.image(648, 500, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("14").input.dropZone = true;
-        this.drop15 = this.add.image(822, 500, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("15").input.dropZone = true;        
+        this.drop15 = this.add.image(822, 500, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("15").input.dropZone = true;
         //Fila 3
         this.drop16 = this.add.image(126, 650, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("16").input.dropZone = true;
-        this.drop17= this.add.image(300, 650, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("17").input.dropZone = true;
+        this.drop17 = this.add.image(300, 650, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("17").input.dropZone = true;
         this.drop18 = this.add.image(474, 650, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("18").input.dropZone = true;
         this.drop19 = this.add.image(648, 650, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("19").input.dropZone = true;
-        this.drop20 = this.add.image(822, 650, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("20").input.dropZone = true;        
-
+        this.drop20 = this.add.image(822, 650, 'drop2').setDepth(-1).setInteractive().setScale(.7).setName("20").input.dropZone = true;
         //Programación de eventos principales
         const eventos = Phaser.Input.Events;
         //Evento para inicializar el arrastre
@@ -110,62 +117,80 @@ class Bootloader extends Phaser.Scene{
         });
         //Evento que hace que el objeto se mueva con el puntero
         this.input.on(eventos.DRAG, (pointer, obj, dragX, dragY) => {
+            obj.setDepth(3);
+            this.ocupado = false;
+            console.log("ocupado drag:", this.ocupado)
             obj.x = dragX;
             obj.y = dragY;
         });
         //Evento que controla el final del arrastre
         this.input.on(eventos.DRAG_END, (pointer, obj, dropzone) => {
-            if ( !dropzone ) { //Cuando no sea dropeable
+            if (!dropzone) { //Cuando no sea dropeable
                 obj.x = obj.input.dragStartX;//Arrastre de un game-object sobre una zona "dropeable"
                 obj.y = obj.input.dragStartY;
             }
             obj.setScale(.7);
         });
         //Personalización de eventos de la zona "dropeable"
-        this.input.on(eventos.DRAG_ENTER, (pointer, obj, dropzone) => {           
+        this.input.on(eventos.DRAG_ENTER, (pointer, obj, dropzone) => {
             dropzone.setTint(0x3339FF);
         });
         this.input.on(eventos.DRAG_LEAVE, (pointer, obj, dropzone) => {
             dropzone.clearTint();
         });
+        //FUNCION PARA REINICIAR
+        let reiniciarJuego = () => {
+            this.scene.restart();
+        };
+        let showGanaste = () => {
+            this.music.stop();
+            this.ganaste.setAlpha(1);
+            this.ganasteAudio.play();
+        };
         //Evento DROP
         this.input.on(eventos.DROP, (pointer, obj, dropzone) => {
+            obj.setDepth(2);
             obj.x = dropzone.x;
             obj.y = dropzone.y;
-            console.log("Objeto: ",obj.name);
-            console.log("Dropzone: ",dropzone.name);
+            this.ocupado = true;
+            console.log("ocupado drop:", this.ocupado)
+            console.log("Objeto: ", obj.name);
+            console.log("Dropzone: ", dropzone.name);
             //Se verifica que el lugar sea el correspondiente a la pieza
-            if(dropzone.name == obj.name){
+            if (dropzone.name == obj.name) {
+                obj.setDepth(1);
                 obj.input.draggable = false;
                 dropzone.input.dropZone = false;
-                dropzone.setDepth(-1);
                 this.acierto.play();
-                contador =  contador+1;
-                console.log(contador);
-                if(contador == aciertos){
-                    console.log(contador);
-                    this.titulo2.setAlpha(1);
+                contador = contador + 1;
+                //VERIFICAR SI EL JUGADOR GANÓ
+                if (contador == aciertos) {
+                    //console.log(contador);
+                    timedEvent2 = this.time.delayedCall(1000, showGanaste, [], this);
+                    timedEvent = this.time.delayedCall(4000, reiniciarJuego, [], this);
                 }
             }
         });
 
         //EVENTOS PARA REINICIO
-        this.reiniciar.on(eventos.POINTER_OVER, function() {
+        this.reiniciar.on(eventos.POINTER_OVER, function () {
             this.setScale(.4);
-            //this.setTint("0xF13526");
         });
-        this.reiniciar.on(eventos.POINTER_OUT, function() {
+        this.reiniciar.on(eventos.POINTER_OUT, function () {
             this.setScale(.3);
-            //this.clearTint();
         });
-        this.reiniciar.on(eventos.POINTER_DOWN, function() {
-            this.scene.restart();
+        this.reiniciar.on(eventos.POINTER_DOWN, function () {
+            this.music.stop();
+            reiniciarJuego();
         }, this);
-
     }
 
     update(time, delta) {
-        
+        // if(this.finJuego){
+        //     this.music.stop();
+        //     this.ganasteAudio.play();
+        //     this.finJuego = false;
+        // }
     }
 }
 

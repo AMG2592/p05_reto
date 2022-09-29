@@ -22,6 +22,10 @@ const config = {
                 "#e74c3c", 
                 "#000000"]
     },
+    scale: {
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+    },
     //zoom: 1.5,
 };
 
