@@ -20,10 +20,10 @@ class Bootloader extends Phaser.Scene {
     }
 
     create() {
-        //Banderas
-        let ocupado = false;
+        let records = "";
+        let jugadores = [];
         //Contador 
-        let contador = 0;
+        let contador = 19;
         let aciertos = 20;
         this.fondo = this.add.image(1000, 470, 'fondo').setDepth(-2).setAlpha(.55);
         //TIMER
@@ -118,8 +118,6 @@ class Bootloader extends Phaser.Scene {
         //Evento que hace que el objeto se mueva con el puntero
         this.input.on(eventos.DRAG, (pointer, obj, dragX, dragY) => {
             obj.setDepth(3);
-            this.ocupado = false;
-            console.log("ocupado drag:", this.ocupado)
             obj.x = dragX;
             obj.y = dragY;
         });
@@ -142,20 +140,21 @@ class Bootloader extends Phaser.Scene {
         let reiniciarJuego = () => {
             this.scene.restart();
         };
+        //FUNCIÓN QUE CAMBIA PANTALLA DE GANADOR
         let showGanaste = () => {
+            jugadores.push = prompt("Ingrese sus iniciales");
             this.music.stop();
             this.ganaste.setAlpha(1);
             this.ganasteAudio.play();
+            alert("Los ganadores de este juego son: \n");
         };
         //Evento DROP
         this.input.on(eventos.DROP, (pointer, obj, dropzone) => {
             obj.setDepth(2);
             obj.x = dropzone.x;
             obj.y = dropzone.y;
-            this.ocupado = true;
-            console.log("ocupado drop:", this.ocupado)
-            console.log("Objeto: ", obj.name);
-            console.log("Dropzone: ", dropzone.name);
+            // console.log("Objeto: ", obj.name);
+            // console.log("Dropzone: ", dropzone.name);
             //Se verifica que el lugar sea el correspondiente a la pieza
             if (dropzone.name == obj.name) {
                 obj.setDepth(1);
@@ -165,6 +164,7 @@ class Bootloader extends Phaser.Scene {
                 contador = contador + 1;
                 //VERIFICAR SI EL JUGADOR GANÓ
                 if (contador == aciertos) {
+            //RECOPILACIÓN DE DATOS JUGADOR
                     //console.log(contador);
                     timedEvent2 = this.time.delayedCall(1000, showGanaste, [], this);
                     timedEvent = this.time.delayedCall(4000, reiniciarJuego, [], this);
@@ -186,11 +186,6 @@ class Bootloader extends Phaser.Scene {
     }
 
     update(time, delta) {
-        // if(this.finJuego){
-        //     this.music.stop();
-        //     this.ganasteAudio.play();
-        //     this.finJuego = false;
-        // }
     }
 }
 
