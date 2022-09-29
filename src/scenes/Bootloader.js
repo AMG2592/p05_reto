@@ -6,12 +6,12 @@ class Bootloader extends Phaser.Scene{
     }
 
     init() {
-        console.log('Escena Bootloader');
+        console.log('Escena Bootloader')
     }
     
     preload() {
         this.load.path = './assets/';
-        this.load.image(['1', '2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','danzatrina','reiniciar','rompecabezas']);
+        this.load.image(['1', '2','3','4','5','6','7','8','9','10','11','12','13','14','15','16','17','18','19','20','danzatrina','reiniciar','rompecabezas','cursor','ganaste']);
         this.load.image("drop2", "drop2.png");
         this.load.image("fondo", "fondo.png");
         this.load.audio('Llorona', ['./Llorona.mp3']);
@@ -19,13 +19,18 @@ class Bootloader extends Phaser.Scene{
     }
 
     create() {
+        //Contador 
+        let contador = 0;
+        let aciertos = 20;
         this.fondo = this.add.image(1000, 470, 'fondo').setDepth(-2).setAlpha(.55);
         //Imagen de referencia para puzzle
         this.imgReferencia = this.add.image(1190, 190, 'danzatrina').setScale(.37);
         //Imagen reiniciar
-        this.reiniciar = this.add.image(470,850,'reiniciar').setScale(.3).setInteractive();
+        this.reiniciar = this.add.image(470,840,'reiniciar').setScale(.3).setInteractive();
         //Imagen Rompecabezas
         this.titulo = this.add.image(470,80,'rompecabezas').setScale(.6);
+        //Imagen GANASTE
+        this.titulo2 = this.add.image(1000, 470,'ganaste').setDepth(2).setAlpha(0);
         //MÚSICA DE FONDO
         //this.music = this.sound.add('Llorona', {loop: true, volume: .2});
         //this.music.play();
@@ -129,20 +134,33 @@ class Bootloader extends Phaser.Scene{
             obj.y = dropzone.y;
             console.log("Objeto: ",obj.name);
             console.log("Dropzone: ",dropzone.name);
+            //Se verifica que el lugar sea el correspondiente a la pieza
             if(dropzone.name == obj.name){
                 obj.input.draggable = false;
                 dropzone.input.dropZone = false;
+                dropzone.setDepth(-1);
                 this.acierto.play();
+                contador =  contador+1;
+                console.log(contador);
+                if(contador == aciertos){
+                    console.log(contador);
+                    this.titulo2.setAlpha(1);
+                }
             }
         });
 
         //EVENTOS PARA REINICIO
         this.reiniciar.on(eventos.POINTER_OVER, function() {
             this.setScale(.4);
+            //this.setTint("0xF13526");
         });
         this.reiniciar.on(eventos.POINTER_OUT, function() {
             this.setScale(.3);
+            //this.clearTint();
         });
+        this.reiniciar.on(eventos.POINTER_DOWN, function() {
+            this.scene.restart();
+        }, this);
 
     }
 
