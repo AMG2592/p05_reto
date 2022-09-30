@@ -170,6 +170,7 @@ class Bootloader extends Phaser.Scene {
                 records += jugadores[i] + "  --->  movimientos: " + movimientos[i] + "\n";
             }
             alert("° LISTA DE GANADORES °\n\n" + records);
+            
         };
         //Evento DROP
         this.input.on(eventos.DROP, (pointer, obj, dropzone) => {
@@ -188,7 +189,7 @@ class Bootloader extends Phaser.Scene {
                 if (contador == aciertos) {
                     movimientos.push(contmov);
                     timedEvent2 = this.time.delayedCall(1000, showGanaste, [], this);
-                    timedEvent = this.time.delayedCall(4000, reiniciarJuego, [], this);
+                    timedEvent = this.time.delayedCall(5000, reiniciarJuego, [], this);
                 }
             }
         });
