@@ -1,3 +1,7 @@
+// Variables globales para Lista de Ganadores
+let jugadores = [];
+let movimientos = [];
+
 class Bootloader extends Phaser.Scene {
     constructor() {
         super({
@@ -20,23 +24,28 @@ class Bootloader extends Phaser.Scene {
     }
 
     create() {
+        // Variables para nombres de jugadores
+        let nombre = "";
         let records = "";
-        let jugadores = [];
+        //Banderas
+        let correcto = false;
         //Contador 
-        let contador = 19;
+        let contmov = 0;
+        let contador = 0;
         let aciertos = 20;
-        this.fondo = this.add.image(1000, 470, 'fondo').setDepth(-2).setAlpha(.55);
         //TIMER
         let timedEvent;
         let timedEvent2;
+        //Imagen de Fondo
+        this.fondo = this.add.image(1000, 470, 'fondo').setDepth(-2).setAlpha(.55);
         //Imagen de referencia para puzzle
         this.imgReferencia = this.add.image(1190, 190, 'danzatrina').setScale(.37);
         //Imagen reiniciar
         this.reiniciar = this.add.image(470, 840, 'reiniciar').setScale(.3).setInteractive();
-        //Imagen Rompecabezas
+        //Imagen Titulo(Rompecabezas)
         this.titulo = this.add.image(470, 80, 'rompecabezas').setScale(.6);
         //Imagen GANASTE
-        this.ganaste = this.add.image(1000, 470, 'ganaste').setDepth(2).setAlpha(0);
+        this.ganaste = this.add.image(1000, 470, 'ganaste').setDepth(4).setAlpha(0);
         //MÚSICA DE FONDO
         this.music = this.sound.add('Llorona', { loop: true, volume: .2 });
         this.music.play();
@@ -142,20 +151,33 @@ class Bootloader extends Phaser.Scene {
         };
         //FUNCIÓN QUE CAMBIA PANTALLA DE GANADOR
         let showGanaste = () => {
-            jugadores.push = prompt("Ingrese sus iniciales");
+            do {
+                nombre = prompt("¡¡ Felicidades Ganador(a) !! \n Ingresa tus iniciales"); 
+                if (nombre.length > 3 || nombre.length < 3){
+                    alert("Por favor ingresa solo tres iniciales.");
+                    correcto = false;
+                }
+                else{
+                    correcto = true;
+                }
+            }while(!correcto);
+            jugadores.push(nombre);
             this.music.stop();
             this.ganaste.setAlpha(1);
             this.ganasteAudio.play();
-            alert("Los ganadores de este juego son: \n");
+            // Recorrer arreglo jugadores para su impresión en alert
+            for (let i=0; i<jugadores.length; i++){
+                records += jugadores[i] + "  --->  movimientos: " + movimientos[i] + "\n";
+            }
+            alert("° LISTA DE GANADORES °\n\n" + records);
         };
         //Evento DROP
         this.input.on(eventos.DROP, (pointer, obj, dropzone) => {
             obj.setDepth(2);
             obj.x = dropzone.x;
             obj.y = dropzone.y;
-            // console.log("Objeto: ", obj.name);
-            // console.log("Dropzone: ", dropzone.name);
-            //Se verifica que el lugar sea el correspondiente a la pieza
+            contmov = contmov+ 1; // Incremento de movimientos
+             //Se verifica que el lugar sea el correspondiente a la pieza
             if (dropzone.name == obj.name) {
                 obj.setDepth(1);
                 obj.input.draggable = false;
@@ -164,8 +186,7 @@ class Bootloader extends Phaser.Scene {
                 contador = contador + 1;
                 //VERIFICAR SI EL JUGADOR GANÓ
                 if (contador == aciertos) {
-            //RECOPILACIÓN DE DATOS JUGADOR
-                    //console.log(contador);
+                    movimientos.push(contmov);
                     timedEvent2 = this.time.delayedCall(1000, showGanaste, [], this);
                     timedEvent = this.time.delayedCall(4000, reiniciarJuego, [], this);
                 }
